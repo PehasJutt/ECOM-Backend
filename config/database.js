@@ -13,7 +13,7 @@ const options = {
   if (
     readyState !== 1 || readyState !== 2
   ) {
-    set('strictQuery', false)
+    set('strictQuery', false);
     connect(MONGO_URL, options)
       .then(() => {
         console.log('INFO - MongoDB Database connected.');

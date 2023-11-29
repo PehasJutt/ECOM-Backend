@@ -1,18 +1,23 @@
-import 'dotenv/config';
 import express from 'express';
-import cors from 'cors';
 
-import './config/database';
+import 'dotenv/config';
+import './config';
+
+import agenda from './jobs/agenda';
+import { invokeDashboardJob } from './jobs';
 import ApplyMiddlewares from './middlewares';
 import router from './routes';
 
 const app = express();
 
-app.use(cors());
 ApplyMiddlewares(app);
+app.use('/', router);
 
-app.use('/v1', router);
+(async () => {
+  await agenda.start();
+  invokeDashboardJob('15 minutes');
+})();
 
 app.listen(process.env.PORT, () => {
-  console.log(`app is listening to port ${process.env.PORT}`);
+  console.log(`Express Server is listening to port ${process.env.PORT}`);
 });

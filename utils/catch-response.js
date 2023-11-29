@@ -1,4 +1,3 @@
-
 const catchResponse = ({
   res,
   err
@@ -17,6 +16,7 @@ const catchResponse = ({
   if (err.message) {
     error = err.message;
   }
+  console.log(err);
 
   return res.status(statusCode).json({
     success: false,

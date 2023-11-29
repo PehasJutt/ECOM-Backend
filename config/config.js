@@ -6,4 +6,4 @@ const {
 export {
   PORT,
   MONGO_URL
-}
+};
